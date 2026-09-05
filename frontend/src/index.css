@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-size-multiplier: 1;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: 'Comic Neue', 'Comic Sans MS', system-ui, -apple-system, sans-serif;
+  }
+
+  /* High contrast mode */
+  .high-contrast {
+    --hc-bg: #000000;
+    --hc-text: #ffffff;
+    --hc-accent: #ffff00;
+    --hc-card: #1a1a1a;
+    --hc-border: #ffffff;
+  }
+
+  .high-contrast body,
+  .high-contrast .bg-white,
+  .high-contrast .bg-slate-50,
+  .high-contrast .bg-slate-100 {
+    background-color: #000000 !important;
+  }
+
+  .high-contrast .text-slate-900,
+  .high-contrast .text-slate-700,
+  .high-contrast .text-slate-600 {
+    color: #ffffff !important;
+  }
+
+  .high-contrast .text-blue-600,
+  .high-contrast .text-emerald-600,
+  .high-contrast .text-orange-600,
+  .high-contrast .text-purple-600,
+  .high-contrast .text-pink-600,
+  .high-contrast .text-teal-600 {
+    color: #ffff00 !important;
+  }
+
+  .high-contrast button,
+  .high-contrast .rounded-2xl,
+  .high-contrast .rounded-3xl {
+    border: 2px solid #ffffff !important;
+  }
+
+  .high-contrast .shadow-lg,
+  .high-contrast .shadow-xl,
+  .high-contrast .shadow-md {
+    box-shadow: none !important;
+  }
+
+  /* Reduce motion */
+  .reduce-motion *,
+  .reduce-motion *::before,
+  .reduce-motion *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Font size scaling */
+  .font-size-large {
+    --font-size-multiplier: 1.25;
+  }
+
+  .font-size-xlarge {
+    --font-size-multiplier: 1.5;
+  }
+
+  .font-size-large .text-base { font-size: 1.25rem; }
+  .font-size-large .text-lg { font-size: 1.375rem; }
+  .font-size-large .text-xl { font-size: 1.5rem; }
+  .font-size-large .text-2xl { font-size: 1.75rem; }
+  .font-size-large .text-3xl { font-size: 2rem; }
+  .font-size-large .text-4xl { font-size: 2.5rem; }
+
+  .font-size-xlarge .text-base { font-size: 1.5rem; }
+  .font-size-xlarge .text-lg { font-size: 1.625rem; }
+  .font-size-xlarge .text-xl { font-size: 1.75rem; }
+  .font-size-xlarge .text-2xl { font-size: 2rem; }
+  .font-size-xlarge .text-3xl { font-size: 2.5rem; }
+  .font-size-xlarge .text-4xl { font-size: 3rem; }
+}
+
+@layer components {
+  .large-touch {
+    @apply min-w-[72px] min-h-[72px] p-4;
+  }
+
+  .card-interactive {
+    @apply transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer;
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2;
+  }
+}
+
+@layer utilities {
+  @keyframes pulse-ring {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 0.3; }
+    100% { transform: scale(0.95); opacity: 0.7; }
+  }
+
+  .animate-pulse-ring {
+    animation: pulse-ring 1.5s ease-in-out infinite;
+  }
+
+  @keyframes bounce-in {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.5s ease-out;
+  }
+
+  @keyframes star-burst {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+  }
+
+  .animate-star-burst {
+    animation: star-burst 0.8s ease-out;
+  }
+
+  @keyframes slide-up {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.4s ease-out;
+  }
+}
