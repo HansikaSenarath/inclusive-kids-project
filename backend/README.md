@@ -36,16 +36,44 @@ npm run dev
 The API starts on `http://localhost:4000` by default. All routes are
 mounted under `/api`.
 
+## Deploy to Vercel
+
+Create the Vercel project from this repository and set its **Root Directory**
+to `backend`. Vercel will use `api/index.ts` as the serverless function entry
+point; do not use `src/server.ts` as the Vercel entrypoint because that file
+starts a long-running HTTP listener for local development.
+
+Add these environment variables in the Vercel project settings for the
+Production environment:
+
+```dotenv
+DATABASE_URL=your-hosted-postgresql-connection-string
+CORS_ORIGIN=https://your-frontend-domain.example
+NODE_ENV=production
+```
+
+After deployment, verify `https://your-backend-domain.example/api/health`.
+Set the frontend's `VITE_API_URL` to
+`https://your-backend-domain.example/api` and redeploy the frontend.
+
+Run database migrations from a trusted environment against the same hosted
+database before using the deployed API:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
 ## Scripts
 
-| Script              | Purpose                                   |
-|---------------------|--------------------------------------------|
-| `npm run dev`        | Start the API with hot reload (tsx)        |
-| `npm run build`      | Compile TypeScript to `dist/`              |
-| `npm start`          | Run the compiled build                     |
-| `npm run typecheck`  | Type-check without emitting files          |
-| `npm run db:migrate` | Apply any pending SQL migrations           |
-| `npm run db:seed`    | Insert demo content items                  |
+| Script               | Purpose                             |
+| -------------------- | ----------------------------------- |
+| `npm run dev`        | Start the API with hot reload (tsx) |
+| `npm run build`      | Compile TypeScript to `dist/`       |
+| `npm start`          | Run the compiled build              |
+| `npm run typecheck`  | Type-check without emitting files   |
+| `npm run db:migrate` | Apply any pending SQL migrations    |
+| `npm run db:seed`    | Insert demo content items           |
 
 ## API reference
 
